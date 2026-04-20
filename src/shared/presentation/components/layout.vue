@@ -1,6 +1,5 @@
 <script setup>
 import {ref} from "vue";
-import {Menubar as PvMenubar} from "primevue";
 import LanguageSwitcher from "./language-switcher.vue";
 import FooterContent from "./footer-content.vue";
 
