@@ -18,13 +18,15 @@
    */
 
   /**
-   * @typedef {Object} SourceListEmits
-   * @property {(event: 'source-selected', source: Source) => void} emit
+   * @callback SourceListEmit
+   * @param {'source-selected'} event
+   * @param {Source} source
+   * @returns {void}
    */
 
   /** @type {SourceListProps} */
-  const props = defineProps({ visible: Boolean, sources: Array[Source] });
-  /** @type {SourceListEmits['emit']} */
+  const props = defineProps({ visible: Boolean, sources: { type: Array, required: true } });
+  /** @type {SourceListEmit} */
   const emit  = defineEmits(['source-selected']);
 
   /**

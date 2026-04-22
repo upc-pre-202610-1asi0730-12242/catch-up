@@ -1,6 +1,39 @@
 import axios from "axios";
 
 /**
+ * @typedef {Object} SourceResource
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [description]
+ * @property {string} [url]
+ * @property {string} [category]
+ * @property {string} [language]
+ * @property {string} [country]
+ */
+
+/**
+ * @typedef {Object} SourcesResponse
+ * @property {string} status
+ * @property {SourceResource[]} sources
+ */
+
+/**
+ * @typedef {Object} ArticleResource
+ * @property {string} [title]
+ * @property {string} [description]
+ * @property {string} [url]
+ * @property {string} [urlToImage]
+ * @property {string} [publishedAt]
+ * @property {SourceResource} source
+ */
+
+/**
+ * @typedef {Object} ArticlesResponse
+ * @property {string} status
+ * @property {ArticleResource[]} articles
+ */
+
+/**
  * Infrastructure adapter for NewsAPI HTTP endpoints.
  *
  * @remarks
@@ -24,7 +57,7 @@ export class NewsApi {
     /**
      * Retrieves available news sources.
      *
-     * @returns {Promise<import('axios').AxiosResponse<any>>}
+     * @returns {Promise<import('axios').AxiosResponse<SourcesResponseResource>>}
      */
     getSources() {
         return http.get(`${sourcesEndpoint}`);
@@ -34,7 +67,7 @@ export class NewsApi {
      * Retrieves top headlines for a specific source id.
      *
      * @param {string} sourceId
-     * @returns {Promise<import('axios').AxiosResponse<any>>}
+     * @returns {Promise<import('axios').AxiosResponse<ArticlesResponseResource>>}
      */
     getArticlesForSourceId(sourceId) {
         return http.get(`${topHeadlinesEndpoint}`, {params: {sources: sourceId}});

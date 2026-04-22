@@ -3,17 +3,34 @@ import {SourceAssembler} from "./source.assembler.js";
 import {Article} from "../domain/model/article.entity.js";
 
 /**
- * @typedef {Object} ArticleApiResource
+ * @typedef {Object} SourceResource
+ * @property {string} [id]
+ * @property {string} [name]
+ * @property {string} [description]
+ * @property {string} [url]
+ * @property {string} [category]
+ * @property {string} [language]
+ * @property {string} [country]
+ */
+
+/**
+ * @typedef {Object} ArticleResource
  * @property {string} [title]
  * @property {string} [description]
  * @property {string} [url]
  * @property {string} [urlToImage]
  * @property {string} [publishedAt]
- * @property {{id?: string, name?: string, description?: string, url?: string, category?: string, language?: string, country?: string}} [source]
+ * @property {SourceResource} source
  */
 
 /**
- * Maps article resources from infrastructure responses into domain entities.
+ * @typedef {Object} ArticlesResponse
+ * @property {string} status
+ * @property {ArticleResource[]} articles
+ */
+
+/**
+ * Infrastructure mapper that translates article resources into domain entities.
  */
 export class ArticleAssembler {
     /** @type {import('../domain/model/source.entity.js').Source | null} */
@@ -31,7 +48,7 @@ export class ArticleAssembler {
     }
 
     /**
-     * @param {ArticleApiResource} resource
+     * @param {ArticleResource} resource
      * @returns {Article}
      */
     static toEntityFromResource(resource) {
@@ -41,7 +58,9 @@ export class ArticleAssembler {
     }
 
     /**
-     * @param {import('axios').AxiosResponse<{status: string, articles: ArticleApiResource[]}>} response
+     * Maps an HTTP response payload into article entities.
+     *
+     * @param {import('axios').AxiosResponse<ArticlesResponse>} response
      * @returns {Article[]}
      */
     static toEntitiesFromResponse(response) {

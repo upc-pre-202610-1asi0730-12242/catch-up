@@ -17,8 +17,10 @@ import {toRefs} from "vue";
  */
 
 /**
- * @typedef {Object} ArticleItemEmits
- * @property {(event: 'tooltip-showed', articleUrl: string) => void} emit
+ * @callback ArticleItemEmit
+ * @param {'tooltip-showed'} event
+ * @param {string} articleUrl
+ * @returns {void}
  */
 
 const {t} = useI18n();
@@ -26,7 +28,7 @@ const {t} = useI18n();
 /** @type {ArticleItemProps} */
 const props = defineProps({article: {type: Article, required: true}});
 const {article} = toRefs(props);
-/** @type {ArticleItemEmits['emit']} */
+/** @type {ArticleItemEmit} */
 const emit = defineEmits(['tooltip-showed']);
 
 /**

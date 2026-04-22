@@ -4,6 +4,9 @@ import {toRefs} from "vue";
 
 /**
  * Presentation component for rendering a collection of article cards.
+ *
+ * @remarks
+ * This list consumes Article entities already prepared by the application layer.
  */
 
 /**

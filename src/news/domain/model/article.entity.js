@@ -1,6 +1,22 @@
 import {Source} from "./source.entity.js";
 
+/**
+ * @typedef {Object} ArticleAttributes
+ * @property {string} [title]
+ * @property {string} [description]
+ * @property {string} [url]
+ * @property {string} [urlToImage]
+ * @property {string} [publishedAt]
+ * @property {import('./source.entity.js').Source | Object | null} [source]
+ */
+
+/**
+ * Domain entity that represents a published news article.
+ */
 export class Article {
+    /**
+     * @param {ArticleAttributes} attributes
+     */
     constructor({ title = '', description = '',
                 url = '', urlToImage = '', source = null,
                 publishedAt = ''}) {
@@ -12,6 +28,11 @@ export class Article {
         this.publishedAt = new Date(publishedAt);
     }
 
+    /**
+     * Builds a locale-formatted timestamp for presentation needs.
+     *
+     * @returns {string}
+     */
     getFormattedPublishedAt() {
         return this.publishedAt.toLocaleDateString('en-US', {
             year: 'numeric',

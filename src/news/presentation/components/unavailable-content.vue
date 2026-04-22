@@ -4,17 +4,20 @@
 
   /**
    * Presentation fallback component for infrastructure/application errors.
+   *
+   * @remarks
+   * This component displays error objects produced by failed use-case execution.
    */
 
   /**
    * @typedef {Object} UnavailableContentProps
-   * @property {Array<unknown>} errors
+   * @property {unknown[]} errors
    */
 
   const { t } = useI18n();
 
   /** @type {UnavailableContentProps} */
-  const props = defineProps({ errors: null});
+  const props = defineProps({ errors: { type: Array, required: true }});
   const { errors } = toRefs(props);
 </script>
 

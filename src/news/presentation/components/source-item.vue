@@ -16,13 +16,15 @@
    */
 
   /**
-   * @typedef {Object} SourceItemEmits
-   * @property {(event: 'source-selected', source: Source) => void} emit
+   * @callback SourceItemEmit
+   * @param {'source-selected'} event
+   * @param {Source} source
+   * @returns {void}
    */
 
   /** @type {SourceItemProps} */
   const props = defineProps({ source: { type: Source, required: true } });
-  /** @type {SourceItemEmits['emit']} */
+  /** @type {SourceItemEmit} */
   const emit  = defineEmits(['source-selected']);
 
   const { source } = toRefs(props);

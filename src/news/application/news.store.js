@@ -5,14 +5,22 @@ import {SourceAssembler} from "../infrastructure/source.assembler.js";
 import {ArticleAssembler} from "../infrastructure/article.assembler.js";
 
 /**
- * @typedef {Object} NewsStore
+ * @typedef {Object} NewsStoreState
  * @property {import('../domain/model/source.entity.js').Source[]} sources
  * @property {import('../domain/model/article.entity.js').Article[]} articles
- * @property {Array<unknown>} errors
+ * @property {unknown[]} errors
  * @property {import('../domain/model/source.entity.js').Source | null} currentSource
+ */
+
+/**
+ * @typedef {Object} NewsStoreActions
  * @property {(source: import('../domain/model/source.entity.js').Source) => void} setCurrentSource
  * @property {() => void} loadSources
  * @property {() => void} loadArticlesForCurrentSource
+ */
+
+/**
+ * @typedef {NewsStoreState & NewsStoreActions} NewsStore
  */
 
 const newsApi = new NewsApi();
@@ -24,6 +32,7 @@ const newsApi = new NewsApi();
  * In DDD terms, this module coordinates use-case behavior and delegates data
  * acquisition/mapping to infrastructure services.
  */
+/** @type {NewsStore} */
 export const newsStore = reactive({
         sources: [],
         articles: [],
