@@ -75,12 +75,19 @@ src/
 
 ## Architecture Notes
 
-The codebase follows a domain-drive-design approach with inner layered organization:
+The codebase follows a domain-driven design approach, with top-level folders for bounded contexts, and inner layered organization for each bounded context:
 
 - `domain`: core entities.
 - `application`: state and app-level behavior (`news.store.js`).
 - `infrastructure`: external service adapters and response mappers.
 - `presentation`: Vue components and UI interactions.
+
+### JSDoc Conventions
+
+- Use domain language in types and docs: `Entity` for domain models, `Resource` or `Response` where convenient for external payloads.
+- Keep mapping direction explicit in infrastructure (`toEntityFromResource`, `toEntitiesFromResponse`).
+- Document presentation components by contracts (props/emits) and leave orchestration details to the application layer.
+- Prefer explicit response shapes in adapters/assemblers over `any` to keep layer boundaries clear.
 
 ## Internationalization
 
